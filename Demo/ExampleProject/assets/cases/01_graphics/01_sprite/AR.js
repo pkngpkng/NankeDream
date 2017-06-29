@@ -1,6 +1,6 @@
 cc.Class({
     extends: cc.Component,
-    //kenanCrazy  测试github
+    //kenanCrazy  测试github    sssssssss
     properties: {
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
