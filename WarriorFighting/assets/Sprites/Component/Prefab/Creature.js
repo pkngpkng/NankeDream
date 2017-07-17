@@ -38,37 +38,41 @@ cc.Class({
         
         //攻击进行立Flag
         ATKActionFlag: 0,
+        //攻击间隔
+        attackSpace: cc.float,
     },
     onload: function(){
         var i;
         this.ATKActionFlag = 0;
+        this.attackTimer = this.attackSpace;
         for(i = 0;i < 3;i ++){
             this.healthNode[i].active = false;
         }
     },
     
     // use this for initialization
-    update: function () { 
-        this.delay ++;
-        this.healthLabel.string = this.health.toFixed(0);
-        this.attackLabel.string = this.attack.toFixed(0);
+    update: function (dt) { 
+        var self = this;
+        self.delay ++;
+        self.healthLabel.string = self.health.toFixed(0);
+        self.attackLabel.string = self.attack.toFixed(0);
         
-        if(this.focusTarget !== null && !this.ATKActionFlag){
-            if(this.focusTarget.x < this.node.x){
-                this.node.x--;
-            }else if(this.focusTarget.x > this.node.x){
-                this.node.x++;
+        if(self.focusTarget !== null && !self.ATKActionFlag){
+            if(self.focusTarget.x < self.node.x){
+                self.node.x--;
+            }else if(self.focusTarget.x > self.node.x){
+                self.node.x++;
             }
         }
-        if(this.delay > 20){
-            this.delay = 0;
+        if(self.delay > 20){
+            self.delay = 0;
             var eventsend = new cc.Event.EventCustom('dataget',true);  
-            eventsend.setUserData({target:this.node}); 
-            this.node.dispatchEvent(eventsend);
+            eventsend.setUserData({target:self.node}); 
+            self.node.dispatchEvent(eventsend);
             //this.changhealth(-1);
         }
         
-            if(!this.ATKActionFlag && this.focusTarget !== null){
+            if(!self.ATKActionFlag && self.focusTarget !== null){
                 var script = null;
             /*if(this.focusType === 0){
                 script = this.focusTarget.getComponent('Player');
@@ -76,13 +80,23 @@ cc.Class({
                 script = this.focusTarget.getComponent('Creature');
             }*/
 		    //判定方法为   目标节点和自己的距离小于等于攻击距离
-		        if( (this.node.width/2 + this.focusTarget.width/2) >= Math.abs(Math.abs(this.node.x - this.focusTarget.x))){
-			        this.attackAction();
-		        }
+		      //  if( (this.node.width/2 + this.focusTarget.width/2) >= Math.abs(Math.abs(this.node.x - this.focusTarget.x))){
+			     //   this.attackAction();
+		      //  }
+		      if (self.attackTimer > 0) {
+		          self.attackTimer -= dt;
+		          console.log(dt);
+		      } else {
+		          if( (self.node.width/2 + self.focusTarget.width/2) >= 
+		          Math.abs(Math.abs(self.node.x - self.focusTarget.x))){
+			        self.attackAction();
+			        self.attackTimer = self.attackSpace;
+		          }
+		      }
 	        }
 	        
-        if( this.death === 1){
-		    this.release();            
+        if( self.death === 1){
+		    self.release();            
         }
     },
     
