@@ -1,9 +1,12 @@
-cc.Class({
+//var SmallMap = require('SmallMap');
+
+var MainGameManager = cc.Class({
     extends: cc.Component,
 
     properties: {
         creaturePrefab: [cc.Prefab],
         creatures: [cc.Node],
+        AttackBehavior: cc.Component,
         heros: [cc.Node],
         logicLayer: cc.Node,
         mapLayer: cc.Node,
@@ -28,28 +31,34 @@ cc.Class({
             var script = creature.getComponent("Creature");
             var mapScript = this.mapLayer.getComponent("SmallMap");
             
-            creature.x = event.detail.X;
+            script.fnCreateCreature(event.detail);
+            script.fnGetManager(this);
+            script.AttackBehavior = this.AttackBehavior;
+            /*creature.x = event.detail.X;
             creature.y = event.detail.Y;
             script.attack = event.detail.attack;
-            script.life = event.detail.life;
+            script.health = event.detail.health;
             script.team = event.detail.team;
-            script.fnTeamRenew();
+            script.GameManager = this;
+            script.fnTeamRenew();*/
+            
         
             this.creatures.push(creature);
-            mapScript.fnCreateSign(creature);
-            this.logicLayer.addChild(creature);
+            //mapScript.fnCreateSign(creature);
+            //this.logicLayer.addChild(creature);
             
-            /*mapScript.fnCreateSign(this.creatures[this.creatures.length - 1]);
-            this.logicLayer.addChild(this.creatures[this.creatures.length - 1]);*/
+            mapScript.fnCreateSign(this.creatures[this.creatures.length - 1]);
+            this.logicLayer.addChild(this.creatures[this.creatures.length - 1]);
+            cc.log(this.creatures.length);
             
             },this);
             
         this.node.on('dataget',function(event){      
-            var i = 0,record = 100000,j = 0;
+            var i = 0,record = Number.POSITIVE_INFINITY,j = 0;
             var targetCreature = event.detail.target;
             var targetScript = targetCreature.getComponent('Creature');
             var script = null;
-            var target = null;
+            var target = null,targetType = -1;
             var distance = 0;
             
             for(i = 0;i < this.creatures.length; i++){
@@ -61,6 +70,7 @@ cc.Class({
                     if(script.team !== targetScript.team  && distance < record){
                         record = distance;
                         target = this.creatures[i];
+                        targetType = 1;
                     }
                 }
             }
@@ -70,16 +80,48 @@ cc.Class({
                 if(script.team !== targetScript.team && distance < record){
                     record = distance;
                     target = this.heros[i];
+                    targetType = 0;
                 }
             }
-            if( record < 16){
+            if( record < 2){
+                
+                /*if( targetType !== 0){
+                this.removeCreature(target);
+                }*/
                 target = null;
             }
 
             script = event.detail.target.getComponent('Creature');
-            script.focus = target;
+            script.focusTarget = target;
+            script.focusType = targetType;
             
-            },this);        
+            },this); 
+            
+            
+        /*this.node.on('creaturerelease',function(event){      
+            var i = 0;
+            var targetCreature = event.detail.target;
+            var targetScript = targetCreature.getComponent('Creature');
+            var script = null;
+            
+            var mapScript = this.mapLayer.getComponent('SmallMap');
+            
+            mapScript.fnDelateSign(targetCreature);    
+            cc.log('小地图搞好了一个');
+            for(i = 0;i < this.creatures.length; i++){
+                if( this.creatures[i] === targetCreature){
+                this.creatures.splice(i,1);
+                this.logicLayer.removeChild(this.creatures[i]);
+                //.removeFromParent(true);
+                //this.creatures[i].active = false;
+                }
+            }
+            
+            
+            targetScript.removeCreature();
+
+            
+            },this);  */    
             
     },
     // called every frame, uncomment this function to activate update callback
@@ -90,10 +132,23 @@ cc.Class({
             this.givePositionToCreature();
         }
     },*/
-    /*givePositionToCreature: function(target){
-        var eventsend = new cc.Event.EventCustom('datagive',true);  
-        eventsend.setUserData({focus:target}); 
-        this.node.dispatchEvent(eventsend);
-    }*/
+    removeCreature: function(node){
+        var i = 0;
+        var script = node.getComponent('Creature');
+        var mapScript = this.mapLayer.getComponent('SmallMap');
+        
+        mapScript.fnDelateSign(node);
+        for(i = 0;i < this.creatures.length; i++){
+            if( this.creatures[i] === node){
+                
+                this.creatures[i].removeFromParent();
+                this.creatures.splice(i,1);
+            }
+        }
+    }
     
 });
+
+/*cfg.load();
+
+module.exports = cfg;*/

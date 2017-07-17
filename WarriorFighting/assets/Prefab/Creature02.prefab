@@ -81,7 +81,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "血量记01",
+    "_name": "血量记02",
     "_objFlags": 0,
     "_opacity": 255,
     "_color": {
@@ -142,7 +142,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "59464d39-8945-45b4-93a4-d5753ddc73ab"
+      "__uuid__": "e6671465-8d9f-48bf-b107-3733ee886a2b"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -167,11 +167,11 @@
     "asset": {
       "__uuid__": "6bef8a07-4a38-4d68-bf31-686354f78f00"
     },
-    "fileId": "f16821zhsRNY5U35zdq+7R2"
+    "fileId": "1662eMe01NEN4hfjmVAxuqP"
   },
   {
     "__type__": "cc.Node",
-    "_name": "血量记02",
+    "_name": "血量记01",
     "_objFlags": 0,
     "_opacity": 255,
     "_color": {
@@ -232,7 +232,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "e6671465-8d9f-48bf-b107-3733ee886a2b"
+      "__uuid__": "59464d39-8945-45b4-93a4-d5753ddc73ab"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -257,7 +257,7 @@
     "asset": {
       "__uuid__": "6bef8a07-4a38-4d68-bf31-686354f78f00"
     },
-    "fileId": "1662eMe01NEN4hfjmVAxuqP"
+    "fileId": "f16821zhsRNY5U35zdq+7R2"
   },
   {
     "__type__": "cc.Node",
@@ -551,28 +551,35 @@
       "__id__": 1
     },
     "_enabled": true,
-    "focus": null,
-    "life": 1,
-    "lifeLabel": {
+    "GameManager": null,
+    "AttackBehavior": null,
+    "focusTarget": null,
+    "focusType": 0,
+    "health": 0,
+    "healthLabel": {
       "__id__": 9
     },
-    "lifeNode": [
+    "healthNode": [
+      {
+        "__id__": 5
+      },
       {
         "__id__": 2
       },
       {
-        "__id__": 5
-      },
-      {
-        "__id__": 5
+        "__id__": 2
       }
     ],
+    "width": 72,
     "attack": 1,
     "attackLabel": {
       "__id__": 15
     },
+    "attackArea": 0,
     "velocity": 0,
-    "team": 0
+    "team": 0,
+    "delay": 0,
+    "ATKActionFlag": 0
   },
   {
     "__type__": "cc.PrefabInfo",

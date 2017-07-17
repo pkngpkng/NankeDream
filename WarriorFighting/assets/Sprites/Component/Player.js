@@ -10,10 +10,10 @@ cc.Class({
         maxMoveSpeed: 0,
         // 射出子弹
         launchButton: cc.Prefab,
-        //蓝条
-  //      manaBar: cc.ProgressBar,
-        //蓝量
-  //      manaLabel: cc.Label,
+        //生命值
+        health: 0,
+        //生命值标签
+        healthLabel: cc.Label,        
         //单位
         body: cc.Node,
         //蓝恢复速度
@@ -77,6 +77,8 @@ cc.Class({
         } else {
             this.mana = this.maxMana;
         }
+        
+        this.healthLabel.string = this.health.toFixed(0);
         //this.manaBar.progress = this.mana / this.maxMana;
         //this.manaLabel.string = this.mana.toFixed(0) + "/" + this.maxMana.toFixed(0);
     },
@@ -96,6 +98,15 @@ cc.Class({
         self.node.runAction(cc.sequence(jumpUp, jumpDown,
         cc.callFunc(function(){self.isCanJump = true;})));
         
+    },
+    
+    changeHealth: function(value){
+	    if(this.health + value > 0){
+		    this.health = this.health + value;
+	    }else{
+		    //完全注销
+		    this.release();
+	    }
     },
     
     setInputControl: function () {

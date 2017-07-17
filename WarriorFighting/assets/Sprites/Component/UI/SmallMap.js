@@ -52,14 +52,17 @@ cc.Class({
     
     fnDelateSign: function(node){
         var i,script;
-        for(i = 0;i < signs.length; i++){
-            script = signs[i].getComponent('SignScript');
+        for(i = 0;i < this.signs.length; i++){
+            script = this.signs[i].getComponent('SignScript');
             if(script.creature === node){
-                this.node.removeChild(resigns[i],true);
-                signs.splice(i,1);
+                this.node.removeChild(this.signs[i],true);
+                this.signs[i].active = false;
+                this.signs.splice(i,1);
+                script.removeSign();
                 break;
             }
         }
+        cc.log(this.signs.length);
     },
 
     // called every frame, uncomment this function to activate update callback
