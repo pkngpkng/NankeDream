@@ -6,7 +6,6 @@ var MainGameManager = cc.Class({
     properties: {
         creaturePrefab: [cc.Prefab],
         creatures: [cc.Node],
-        AttackBehavior: cc.Component,
         heros: [cc.Node],
         logicLayer: cc.Node,
         mapLayer: cc.Node,
@@ -33,7 +32,6 @@ var MainGameManager = cc.Class({
             
             script.fnCreateCreature(event.detail);
             script.fnGetManager(this);
-            script.AttackBehavior = this.AttackBehavior;
             /*creature.x = event.detail.X;
             creature.y = event.detail.Y;
             script.attack = event.detail.attack;
@@ -49,7 +47,6 @@ var MainGameManager = cc.Class({
             
             mapScript.fnCreateSign(this.creatures[this.creatures.length - 1]);
             this.logicLayer.addChild(this.creatures[this.creatures.length - 1]);
-            cc.log(this.creatures.length);
             
             },this);
             

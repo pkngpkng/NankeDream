@@ -23,7 +23,7 @@ cc.Class({
     // use this for initialization
     onButtonTouchEvent: function (event,customEventData) {
         var eventsend = new cc.Event.EventCustom('creaturecreate',true);  
-            eventsend.setUserData({X:(3072*Math.random()),Y:-95,attack:2,health:10,team:this.team}); 
+            eventsend.setUserData({X:(512 + this.team*200),Y:-95,attack:2,health:10,team:this.team}); 
         //cc.eventManager.dispatchEvent(event);  
         this.node.dispatchEvent(eventsend);
     },

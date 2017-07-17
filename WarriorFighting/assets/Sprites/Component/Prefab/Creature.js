@@ -26,12 +26,15 @@ cc.Class({
         attackLabel:cc.Label,
         //攻击范围
         attackArea:0,
+        
         //速度
         velocity:0,
         //所属的队伍
         team:0,
         //延时用
         delay:0,
+        //是否死亡
+        death:0,
         
         //攻击进行立Flag
         ATKActionFlag: 0,
@@ -39,7 +42,6 @@ cc.Class({
     onload: function(){
         var i;
         this.ATKActionFlag = 0;
-//        this.AttackBehavior = this.node.getComponent('AttackBehavior');
         for(i = 0;i < 3;i ++){
             this.healthNode[i].active = false;
         }
@@ -50,7 +52,8 @@ cc.Class({
         this.delay ++;
         this.healthLabel.string = this.health.toFixed(0);
         this.attackLabel.string = this.attack.toFixed(0);
-        if(this.focusTarget !== null){
+        
+        if(this.focusTarget !== null && !this.ATKActionFlag){
             if(this.focusTarget.x < this.node.x){
                 this.node.x--;
             }else if(this.focusTarget.x > this.node.x){
@@ -65,18 +68,22 @@ cc.Class({
             //this.changhealth(-1);
         }
         
-        if(!this.ATKActionFlag && this.focusTarget !== null){
-            var script = null;
+            if(!this.ATKActionFlag && this.focusTarget !== null){
+                var script = null;
             /*if(this.focusType === 0){
                 script = this.focusTarget.getComponent('Player');
             }else{
                 script = this.focusTarget.getComponent('Creature');
             }*/
-		//判定方法为   目标节点和自己的距离小于等于攻击距离
-		    if( (this.node.width/2 + this.focusTarget.width/2) >= Math.abs(Math.abs(this.node.x - this.focusTarget.x))){
-			    this.attackAction();
-		    }
-	    }
+		    //判定方法为   目标节点和自己的距离小于等于攻击距离
+		        if( (this.node.width/2 + this.focusTarget.width/2) >= Math.abs(Math.abs(this.node.x - this.focusTarget.x))){
+			        this.attackAction();
+		        }
+	        }
+	        
+        if( this.death === 1){
+		    this.release();            
+        }
     },
     
     attackAction:function(){
@@ -98,8 +105,8 @@ cc.Class({
 	    if(this.health + value > 0){
 		    this.health = this.health + value;
 	    }else{
-		    //完全注销
-		    this.release();
+		    //死亡
+		    this.death = 1;
 	    }
     },
     
