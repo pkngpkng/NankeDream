@@ -29,6 +29,8 @@ cc.Class({
         
         //速度
         velocity:0,
+        
+        move: true,
         //所属的队伍
         team:0,
         //延时用
@@ -39,12 +41,14 @@ cc.Class({
         //攻击进行立Flag
         ATKActionFlag: 0,
         //攻击间隔
-        attackSpace: cc.float,
+        attackSpace: 0,
+        
+        attackTimer: 0,
     },
     onload: function(){
         var i;
         this.ATKActionFlag = 0;
-        this.attackTimer = this.attackSpace;
+        this.attackTimer = 0;
         for(i = 0;i < 3;i ++){
             this.healthNode[i].active = false;
         }
@@ -57,7 +61,7 @@ cc.Class({
         self.healthLabel.string = self.health.toFixed(0);
         self.attackLabel.string = self.attack.toFixed(0);
         
-        if(self.focusTarget !== null && !self.ATKActionFlag){
+        if(self.focusTarget !== null && !self.ATKActionFlag && self.move === true){
             if(self.focusTarget.x < self.node.x){
                 self.node.x--;
             }else if(self.focusTarget.x > self.node.x){
@@ -71,28 +75,44 @@ cc.Class({
             self.node.dispatchEvent(eventsend);
             //this.changhealth(-1);
         }
-        
-            if(!self.ATKActionFlag && self.focusTarget !== null){
-                var script = null;
-            /*if(this.focusType === 0){
+            /*var script = null;
+    
+            if(self.focusTarget !== null){
+                
+                if(this.focusType === 0){
                 script = this.focusTarget.getComponent('Player');
-            }else{
+                }else{
                 script = this.focusTarget.getComponent('Creature');
-            }*/
+                }   
+                
+                if(script.death === 1){
+                var event = new cc.Event.EventCustom('dataget',true);  
+                event.setUserData({target:self.node}); 
+                self.node.dispatchEvent(event);
+                }
+            }      */  
+            if (self.attackTimer > 0) {
+		          self.attackTimer -= dt;
+		    }
+		    
+            if(!self.ATKActionFlag && self.focusTarget !== null){
+                this.ATKActionFlag = 1;
+
+
 		    //判定方法为   目标节点和自己的距离小于等于攻击距离
 		      //  if( (this.node.width/2 + this.focusTarget.width/2) >= Math.abs(Math.abs(this.node.x - this.focusTarget.x))){
 			     //   this.attackAction();
 		      //  }
-		      if (self.attackTimer > 0) {
-		          self.attackTimer -= dt;
-		          console.log(dt);
-		      } else {
-		          if( (self.node.width/2 + self.focusTarget.width/2) >= 
-		          Math.abs(Math.abs(self.node.x - self.focusTarget.x))){
+		      if( (self.node.width/2 + self.focusTarget.width/2) >= 
+		      Math.abs(Math.abs(self.node.x - self.focusTarget.x))){		      
+		      if (self.attackTimer <= 0) {
 			        self.attackAction();
 			        self.attackTimer = self.attackSpace;
-		          }
 		      }
+		      }
+		      
+		      this.ATKActionFlag = 0;
+
 	        }
 	        
         if( self.death === 1){
@@ -102,7 +122,7 @@ cc.Class({
     
     attackAction:function(){
         
-	    this.ATKActionFlag = 1;
+	    
 	//如果有攻击动画效果   和子弹  就这里执行和创建吧
 
 	//单体或者范围攻击    调用伤害发生器        

@@ -60,6 +60,7 @@ var MainGameManager = cc.Class({
             
             for(i = 0;i < this.creatures.length; i++){
             script = this.creatures[i].getComponent('Creature');
+            if(script.death === 0){
             distance = Math.abs( this.creatures[i].x - targetCreature.x);
                 if( this.creatures[i] === targetCreature){
                     j = i;
@@ -71,21 +72,28 @@ var MainGameManager = cc.Class({
                     }
                 }
             }
+            }
             for(i = 0;i < this.heros.length; i++){
             script = this.heros[i].getComponent('Player');
+                if(script.death === 0){
             distance = Math.abs( this.heros[i].x - targetCreature.x);
                 if(script.team !== targetScript.team && distance < record){
                     record = distance;
                     target = this.heros[i];
                     targetType = 0;
                 }
+                }
             }
-            if( record < 2){
+            if(target !== null){
+            if( record < target.width/2 + targetCreature.width/2){
                 
                 /*if( targetType !== 0){
                 this.removeCreature(target);
                 }*/
-                target = null;
+                targetScript.move = false;
+            }else{
+                targetScript.move = true;
+            }
             }
 
             script = event.detail.target.getComponent('Creature');

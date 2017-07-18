@@ -24,6 +24,8 @@ cc.Class({
         manaUse: 0,
         //队伍
         team: 0,
+        //死亡
+        death: 0,
     },
     // use this for initialization
     onLoad: function () {
