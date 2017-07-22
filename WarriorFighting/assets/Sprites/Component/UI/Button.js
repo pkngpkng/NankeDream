@@ -1,28 +1,29 @@
-cc.Class({
+/**
+ * @主要功能:   创建npc类
+ * @type {Function}
+ */
+var buttonClass = cc.Class({
     extends: cc.Component,
 
     properties: {
         button: cc.Button,
         enemy: cc.Node,
         team: 0,
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
     },
+
+
     onLoad: function(){
         this.button.node.on('click',this.onButtonTouchEvent,this);
     },
 
-    // use this for initialization
+
+    /**
+     * @主要功能:  点击事件  npc创建事件     需要说明的是npc属性以后需要专门的buff属性管理器js管理  并提供回调函数，并且最好交由创建类去调用处理。
+     * @param event
+     * @param customEventData
+     */
     onButtonTouchEvent: function (event,customEventData) {
-        var eventsend = new cc.Event.EventCustom('creaturecreate',true);  
+        var eventsend = new cc.Event.EventCustom('creatureCreate',true);
         if(this.team === -1){
             eventsend.setUserData({X:(512 + this.team*200),Y:-95,attack:2,health:20,team:this.team}); 
         }else{
@@ -30,11 +31,8 @@ cc.Class({
         }
         //cc.eventManager.dispatchEvent(event);  
         this.node.dispatchEvent(eventsend);
+
+        // cc.log("onButtonTouchEvent事件发射后")
     },
     
-
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
 });

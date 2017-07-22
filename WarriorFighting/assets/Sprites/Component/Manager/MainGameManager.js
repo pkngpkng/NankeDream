@@ -1,54 +1,25 @@
 //var SmallMap = require('SmallMap');
 
+/**
+ * @主要功能:  游戏主流程控制器
+ * @type {Function}
+ */
 var MainGameManager = cc.Class({
     extends: cc.Component,
 
     properties: {
-        creaturePrefab: [cc.Prefab],
+        creaturePrefab: [cc.Prefab],  //小兵预制节点
         creatures: [cc.Node],
         heros: [cc.Node],
-        logicLayer: cc.Node,
-        mapLayer: cc.Node,
+        logicLayer: cc.Node,    //背景节点
+        mapLayer: cc.Node,    //小地图
         delay:0,
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
     },
 
-    // use this for initialization
     onLoad: function () {
-        
-        this.node.on('creaturecreate',function(event){      
-            var creature = cc.instantiate(this.creaturePrefab[0]);
-            var script = creature.getComponent("Creature");
-            var mapScript = this.mapLayer.getComponent("SmallMap");
-            
-            script.fnCreateCreature(event.detail);
-            script.fnGetManager(this);
-            /*creature.x = event.detail.X;
-            creature.y = event.detail.Y;
-            script.attack = event.detail.attack;
-            script.health = event.detail.health;
-            script.team = event.detail.team;
-            script.GameManager = this;
-            script.fnTeamRenew();*/
-            
-        
-            this.creatures.push(creature);
-            //mapScript.fnCreateSign(creature);
-            //this.logicLayer.addChild(creature);
-            
-            mapScript.fnCreateSign(this.creatures[this.creatures.length - 1]);
-            this.logicLayer.addChild(this.creatures[this.creatures.length - 1]);
-            
-            },this);
+
+        //创建npc 小地图节点 事件
+        this.node.on('creatureCreate',this.creatureCreate,this);
             
         this.node.on('dataget',function(event){      
             var i = 0,record = Number.POSITIVE_INFINITY,j = 0;
@@ -85,64 +56,73 @@ var MainGameManager = cc.Class({
                 }
             }
             if(target !== null){
-            if( record < target.width/2 + targetCreature.width/2){
-                
-                /*if( targetType !== 0){
-                this.removeCreature(target);
-                }*/
-                targetScript.move = false;
-            }else{
-                targetScript.move = true;
-            }
+                if( record < target.width/2 + targetCreature.width/2){
+
+                    /*if( targetType !== 0){
+                    this.removeCreature(target);
+                    }*/
+                    targetScript.move = false;
+                }else{
+                    targetScript.move = true;
+                }
             }
 
             script = event.detail.target.getComponent('Creature');
             script.focusTarget = target;
             script.focusType = targetType;
+            script.targetX = target == null ? null : target.x;   //kenan 单独记录坐标x
             
             },this); 
             
-            
-        /*this.node.on('creaturerelease',function(event){      
-            var i = 0;
-            var targetCreature = event.detail.target;
-            var targetScript = targetCreature.getComponent('Creature');
-            var script = null;
-            
-            var mapScript = this.mapLayer.getComponent('SmallMap');
-            
-            mapScript.fnDelateSign(targetCreature);    
-            cc.log('小地图搞好了一个');
-            for(i = 0;i < this.creatures.length; i++){
-                if( this.creatures[i] === targetCreature){
-                this.creatures.splice(i,1);
-                this.logicLayer.removeChild(this.creatures[i]);
-                //.removeFromParent(true);
-                //this.creatures[i].active = false;
-                }
-            }
-            
-            
-            targetScript.removeCreature();
-
-            
-            },this);  */    
-            
     },
-    // called every frame, uncomment this function to activate update callback
-    /*update: function (dt) {
-        this.delay ++;
-        if(this.delay > 10){
-            this.delay = 0;
-            this.givePositionToCreature();
-        }
-    },*/
+
+
+    /**
+     * @主要功能:  创建npc节点    创建小地图节点
+     *              建议以后改用资源池获取节点   资源池使用工厂创建节点，这里可以负责初始化节点属性
+     * @author kenan
+     * @Date 2017/7/23 0:25
+     * @param event
+     */
+    creatureCreate: function(event){  //event为父类事件  实际这里是Event.EventCustom子类
+
+        //kenan 实验证明  事件是同步的  计时器是异步的
+        // this.scheduleOnce(function() {
+
+            /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
+            var npc = cc.instantiate(this.creaturePrefab[0]);
+            var npcScript = npc.getComponent("Creature");
+
+            var mapScript = this.mapLayer.getComponent("SmallMap");
+
+            npcScript.fnCreateCreature(event.detail);//初始化npc属性
+            npcScript.fnGetManager(this);
+
+            this.creatures.push(npc);
+
+            mapScript.fnCreateSign(this.creatures[this.creatures.length - 1]);
+            this.logicLayer.addChild(this.creatures[this.creatures.length - 1]);
+
+            //kenan 停止事件冒泡   (停止继续向上传递此事件)
+            event.stopPropagation();
+
+            // console.log("creatureCreate结束");
+
+        // });
+    },
+
+
+    /**
+     * @主要功能: 释放小兵节点
+     *          建议使用资源池回收节点
+     * @param node
+     */
     removeCreature: function(node){
         var i = 0;
         var script = node.getComponent('Creature');
         var mapScript = this.mapLayer.getComponent('SmallMap');
         
-        mapScript.fnDelateSign(node);
+        mapScript.fnDeleteSign(node);
         for(i = 0;i < this.creatures.length; i++){
             if( this.creatures[i] === node){
                 
@@ -150,10 +130,11 @@ var MainGameManager = cc.Class({
                 this.creatures.splice(i,1);
             }
         }
+
+        //kenan 因为没有回收池  这里需要释放资源
+        node.destroy();
+
     }
     
 });
 
-/*cfg.load();
-
-module.exports = cfg;*/

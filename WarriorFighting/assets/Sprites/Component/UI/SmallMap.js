@@ -1,4 +1,8 @@
-cc.Class({
+/**
+ * @主要功能:   小地图类
+ * @type {Function}
+ */
+var smallMap = cc.Class({
     extends: cc.Component,
 
     properties: {
@@ -8,31 +12,17 @@ cc.Class({
         //小地图标识1：红色 属于大于0的阵营
         data: cc.Node,
         script: null,
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
     },
 
-    // use this for initialization
     onLoad: function () {
         this.script = this.data.getComponent('MainGameManager');
     },
-    
-    /*signRenew: function(){
-        var total = this.signs.length;
-        var total2 = this.script.creatures.length;
-        if(total < total2){
-            this.fnCreateSign(this.script.creatures[total2 - 1]);
-        }
-    }, */
-    
+
+
+    /**
+     * @主要功能:  创建小地图标记节点
+     * @param node
+     */
     fnCreateSign: function(node){
         //借用一个node来创建一个小兵标记，将Node绑定在预制资源中
         var script = node.getComponent('Creature');
@@ -49,8 +39,14 @@ cc.Class({
         this.signs.push(newsign);
         this.node.addChild(this.signs[this.signs.length - 1]);
     },
-    
-    fnDelateSign: function(node){
+
+
+    /**
+     * @主要功能: 释放小兵节点
+     *          建议使用资源池回收节点
+     * @param node
+     */
+    fnDeleteSign: function(node){
         var i,script;
         for(i = 0;i < this.signs.length; i++){
             script = this.signs[i].getComponent('SignScript');
@@ -62,10 +58,10 @@ cc.Class({
                 break;
             }
         }
+
+        //kenan 因为没有回收池  这里需要释放资源
+        node.destroy();
+
     },
 
-    // called every frame, uncomment this function to activate update callback
-    /*update: function (dt) {
-        this.signRenew();
-    },*/
 });
