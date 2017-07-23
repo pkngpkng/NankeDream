@@ -634,6 +634,7 @@
       "__id__": 18
     },
     "focusTarget": null,
+    "targetX": null,
     "focusType": 0,
     "health": 0,
     "healthLabel": {
@@ -662,8 +663,7 @@
     "delay": 0,
     "death": 0,
     "ATKActionFlag": 0,
-    "attackSpace": 1,
-    "attackTimer": 0
+    "attackSpace": 1
   },
   {
     "__type__": "cc.PrefabInfo",

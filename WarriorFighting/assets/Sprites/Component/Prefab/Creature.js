@@ -54,9 +54,9 @@ var monsterShrek = cc.Class({
         var i;
         this.ATKActionFlag = 0;  //攻击行为标记 1攻击进行中
         this.attackTimer = 0;   //攻击计时器
-        for(i = 0;i < 3;i ++){
+        /*for(i = 0;i < 3;i ++){
             this.healthNode[i].active = false;
-        }
+        }*/
 
 
         this.initAction();
@@ -97,7 +97,7 @@ var monsterShrek = cc.Class({
 
 
         //自身移动判定  存在目标+非攻击+可以移动标记
-        if(self.focusTarget != null && !self.ATKActionFlag && self.move == true){
+        if(self.focusTarget !== null && !self.ATKActionFlag && self.move === true){
 
             //kenan 由于现在行为并不同步  所以会有在执行过程中 目标节点已经被注销的情况  所以这里用上次更新的坐标处理
             if(this.targetX < self.node.x){
@@ -124,7 +124,7 @@ var monsterShrek = cc.Class({
 
 
         //攻击行为判定
-        if(!self.ATKActionFlag && self.focusTarget != null){
+        if(!self.ATKActionFlag && self.focusTarget !== null){
             //判定方法为   目标节点和自己的距离小于等于攻击距离
             if( (self.node.width/2 + self.focusTarget.width/2) >= Math.abs(Math.abs(self.node.x - self.focusTarget.x))){
                 // if (self.attackTimer <= 0) {
@@ -194,7 +194,6 @@ var monsterShrek = cc.Class({
     //释放资源
     release:function(){
         this.GameManager.removeCreature(this.node);
-        this.node.active = false;
         this.node.removeFromParent();
     },
 
@@ -211,6 +210,7 @@ var monsterShrek = cc.Class({
         this.team = data.team;
         
         this.fnTeamRenew();
+        cc.log(this.team);
     },
 
 

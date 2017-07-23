@@ -60,7 +60,7 @@ var smallMap = cc.Class({
         }
 
         //kenan 因为没有回收池  这里需要释放资源
-        node.destroy();
+        //node.destroy();
 
     },
 

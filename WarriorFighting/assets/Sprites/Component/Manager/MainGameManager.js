@@ -70,7 +70,7 @@ var MainGameManager = cc.Class({
             script = event.detail.target.getComponent('Creature');
             script.focusTarget = target;
             script.focusType = targetType;
-            script.targetX = target == null ? null : target.x;   //kenan 单独记录坐标x
+            script.targetX = target === null ? null : target.x;   //kenan 单独记录坐标x
             
             },this); 
             
@@ -121,18 +121,17 @@ var MainGameManager = cc.Class({
         var i = 0;
         var script = node.getComponent('Creature');
         var mapScript = this.mapLayer.getComponent('SmallMap');
-        
         mapScript.fnDeleteSign(node);
         for(i = 0;i < this.creatures.length; i++){
             if( this.creatures[i] === node){
                 
-                this.creatures[i].removeFromParent();
+                //this.creatures[i].removeFromParent();
                 this.creatures.splice(i,1);
             }
         }
 
         //kenan 因为没有回收池  这里需要释放资源
-        node.destroy();
+//        node.destroy();
 
     }
     
