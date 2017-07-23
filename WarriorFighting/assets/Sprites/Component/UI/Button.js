@@ -12,9 +12,9 @@ var buttonClass = cc.Class({
     },
 
 
-    onLoad: function(){
-        this.button.node.on('click',this.onButtonTouchEvent,this);
-    },
+    // onLoad: function(){
+    //     this.button.node.on('click',this.onButtonTouchEvent,this);
+    // },
 
 
     /**

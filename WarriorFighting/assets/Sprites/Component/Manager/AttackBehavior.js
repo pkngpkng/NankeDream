@@ -18,7 +18,12 @@ var attackBehavior = cc.Class({
      * @param nodeType  被攻击节点类型
      */
     attack: function (attcNode, Node, nodeType){  
-        
+
+        //目标被销毁  或者为null  不执行
+        if(Node == null || !Node.isValid){
+            return ;
+        }
+
         var script = null,attackScript = null;
         
     	if(nodeType === 0){

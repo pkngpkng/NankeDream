@@ -149,6 +149,11 @@ var monsterShrek = cc.Class({
      * @Date 2017/7/23 1:39
      */
     attackAction: function(){
+
+        //目标为空 或者被销毁  不执行
+        if(this.focusTarget == null || !this.focusTarget.isValid){
+            return ;
+        }
         //如果有攻击动画效果   和子弹  就这里执行和创建吧   攻速可以用动画时长+延迟处理
 
         //单体或者范围攻击    调用伤害发生器
