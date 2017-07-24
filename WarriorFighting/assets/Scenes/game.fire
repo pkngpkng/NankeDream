@@ -896,7 +896,17 @@
       "__uuid__": "60fbd3e5-0de6-466a-aa65-478be2a079c6"
     },
     "positionX": 0,
-    "cardTypeFlag": 0
+    "cardTypeFlag": 0,
+    "cardGroup": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
   },
   {
     "__type__": "cc.Node",

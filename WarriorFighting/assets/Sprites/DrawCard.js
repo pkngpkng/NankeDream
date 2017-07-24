@@ -14,7 +14,10 @@ cc.Class({
         positionX: 0,
         //指定卡片生成的类型  
         cardTypeFlag: 0,
-        returnPostion: 0,
+        cardGroup: {
+            default: [],
+            type: cc.Node,
+        },
     },
     
     // use this for initialization
@@ -31,6 +34,8 @@ cc.Class({
                 var newMagicCard = cc.instantiate(this.magicCardPrefab);
                 newMagicCard.x = 120*(this.positionX);
                 newMagicCard.y = 0;
+                newMagicCard.tag = this.positionX;
+                this.cardGroup[this.positionX]  = newMagicCard;
                 this.node.addChild(newMagicCard);
                 this.cardShape(newMagicCard);
                 this.cardUse(newMagicCard);
@@ -40,6 +45,8 @@ cc.Class({
                 var newBiologyCard = cc.instantiate(this.biologyCardPrefab);
                 newBiologyCard.x = 120*(this.positionX);
                 newBiologyCard.y = 0;
+                newBiologyCard.tag = this.positionX;
+                this.cardGroup[this.positionX] = newBiologyCard;
                 this.node.addChild(newBiologyCard);
                 this.cardShape(newBiologyCard);
                 this.cardUse(newBiologyCard);
@@ -58,13 +65,13 @@ cc.Class({
             /*cardObject.x += 20;
             cardObject.y += 30;*/
              // 让目标动作速度加快一倍，相当于原本2秒的动作在1秒内完成
-                cardObject.runAction(cc.speed(cc.scaleBy(1.2,1.2), 10));
+                cardObject.runAction(cc.speed(cc.scaleBy(1.2,1.2), 7));
         }, this);
         cardObject.on(cc.Node.EventType.MOUSE_LEAVE,function(){
             /*cardObject.x -=20;
             cardObject.y -=30;*/
             cardObject.stopAllActions();
-            cardObject.runAction(cc.speed(cc.scaleTo(1,1),10));
+            cardObject.runAction(cc.speed(cc.scaleTo(1,1),7));
         },this);
     },
     
@@ -81,17 +88,26 @@ cc.Class({
                 cardObject.opacity = 1000;
                 //cardObject.off(cc.Node.EventType.MOUSE_MOVE,this);
                 cardObject.off(cc.Node.EventType.MOUSE_MOVE,cardMove,this);
-                cardObject.x = 120*this.returnPostion;
-                cardObject.y = 0;
-                if(this.returnPostion < 8){
-                    this.returnPostion++;
+                
+                if(cardObject.y >= 100){
+                    this.node.removeChildByTag(cardObject.tag);
+                    for(cardObject.tag;cardObject.tag<8;cardObject.tag++){
+                        this.cardGroup[cardObject.tag] = this.cardGroup[cardObject.tag+1];
+                        this.cardGroup[cardObject.tag].x = 120*this.cardGroup.indexOf(this.cardGroup[cardObject.tag]);
+                        this.cardGroup[cardObject.tag].tag = this.cardGroup.indexOf(this.cardGroup[cardObject.tag]);
+                    }
+                    
                 }else{
-                    this.returnPostion = 0;
-                }
+                        cardObject.x = 120*this.cardGroup.indexOf(cardObject);
+                        cardObject.y = 0;
+                    }
             },this);
             function cardMove(event) {
                     cardObject.x += event.getDeltaX();
                     cardObject.y += event.getDeltaY();
+                    if(cardObject.y >= 100){
+                    cardObject.opacity = 1000;
+                }
             }
     },
     
