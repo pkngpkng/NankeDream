@@ -875,7 +875,7 @@
     "groupIndex": 0
   },
   {
-    "__type__": "3c613JpuZBDAoSLHOx+VNf9",
+    "__type__": "38b55Iz6rZFcaCnkPX5I+ox",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -883,14 +883,18 @@
     },
     "_enabled": true,
     "magicCardPrefab": {
-      "__uuid__": "238e00f1-228a-438a-9578-1f53bcbda45e"
+      "__uuid__": "da9ab23d-e39f-41dc-ac56-3b28fc84e778"
     },
     "biologyCardPrefab": {
-      "__uuid__": "60fbd3e5-0de6-466a-aa65-478be2a079c6"
+      "__uuid__": "07626554-bd43-45e6-ba9a-c3c1cc8909d8"
+    },
+    "cardGroup": [],
+    "heroNode": {
+      "__id__": 9
     },
     "positionX": 0,
     "cardTypeFlag": 0,
-    "returnPostion": 0
+    "drawCardFlag": 0
   },
   {
     "__type__": "cc.Node",
@@ -1266,9 +1270,7 @@
       {
         "__uuid__": "14022617-0264-4ec9-b804-18b6ba2e0c8c"
       },
-      {
-        "__uuid__": "7cdd01a1-e786-49c4-b3d9-24826b426c51"
-      }
+      null
     ],
     "data": {
       "__id__": 3
