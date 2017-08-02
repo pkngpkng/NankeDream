@@ -446,7 +446,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "manaConsume": 10,
+    "manaConsume": 2,
     "manaConsumeLabel": {
       "__id__": 6
     },
@@ -456,7 +456,7 @@
     "attackLabel": {
       "__id__": 9
     },
-    "health": 20,
+    "health": 15,
     "healthLabel": {
       "__id__": 12
     },
