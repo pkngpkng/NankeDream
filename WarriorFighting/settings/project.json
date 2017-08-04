@@ -6,6 +6,8 @@
       false,
       false,
       false,
+      false,
+      false,
       false
     ],
     [
@@ -14,6 +16,8 @@
       false,
       false,
       false,
+      true,
+      true,
       true
     ],
     [
@@ -22,17 +26,23 @@
       false,
       false,
       false,
-      false
-    ],
-    [
-      false,
-      false,
-      false,
       false,
       false,
       false
     ],
     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
       false,
       false,
       false,
@@ -43,6 +53,28 @@
     [
       false,
       true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      true,
+      false,
+      false,
       false,
       false,
       false,
@@ -60,7 +92,9 @@
     "Normal Unit",
     "Attack Range",
     "Bullet",
-    "Wall"
+    "Ground",
+    "Platform",
+    "Ladder"
   ],
   "simulator-orientation": false,
   "simulator-resolution": {
