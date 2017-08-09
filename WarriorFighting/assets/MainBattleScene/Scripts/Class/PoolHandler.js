@@ -2,7 +2,7 @@ function pauseresume () {
     if (this.paused) {
         cc.director.getActionManager().resumeTarget(this);
     }
-    else {
+    else { 
         cc.director.getActionManager().pauseTarget(this);
     }
     this.paused = !this.paused;
