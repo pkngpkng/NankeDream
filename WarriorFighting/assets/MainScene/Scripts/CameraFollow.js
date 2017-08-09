@@ -5,7 +5,7 @@ cc.Class({
         target: {
             default: null,
             type: cc.Node
-        }
+        } 
     },
 
     // use this for initialization
