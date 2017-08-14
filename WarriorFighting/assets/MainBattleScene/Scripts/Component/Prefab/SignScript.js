@@ -20,7 +20,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.node.y = 340;
+        this.node.y = - 16;
     },
     fnGiveNode: function(node){
         this.creature = node;
@@ -33,7 +33,7 @@ cc.Class({
 
     // called every frame, uncomment this function to activate update callback
     update: function (dt) {
-        this.node.x = this.creature.x / 3072 * 416 + 72;
+        this.node.x = this.creature.x / 3072 * 416;
         this.attack.string = this.script.attack;
         this.health.string = this.script.health;
     },

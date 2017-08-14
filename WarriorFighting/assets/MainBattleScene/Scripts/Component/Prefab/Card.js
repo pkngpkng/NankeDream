@@ -11,58 +11,38 @@ cc.Class({
         cardType: 0,     //0法术牌；1生物牌 
         //卡片ID
         cardID: 0,
-        
-        //攻击力
-        attack: 0,
-        //攻击力标签
-        attackLabel: cc.Label,
-        //生命值
-        health: 0,
-        //生命值标签
-        healthLabel: cc.Label,
-        
+        //卡片名称
+        cName: cc.String,
+        //卡片名称的标签
+        cNameLabel: cc.Label,
         /*//描述
         describe: cc.String,*/
         //描述的标签
         describeLabel: cc.Label,
+        
+        roll: cc.Node,
     },
 
     // use this for initialization
     onLoad: function () {
         var self = this;
         self.manaConsumeLabel.string = self.manaConsume;
-        
-        if(self.cardType === 1){
-            self.attackLabel.string = self.attack;
-            self.healthLabel.string = self.health;
-        }
+        self.cNameLabel.String = self.cName;
     },
-    
-    setHealthTo: function(health){
-        var self = this;        
-        self.health = health;
-        self.healthLabel.string = self.health;        
-    },
-    setHealthBy: function(dHealth){
-        var self = this;        
-        self.health += dHealth;
-        self.healthLabel.string = self.health;        
-    },    
-    setAttackTo: function(attack){
-        var self = this;        
-        self.attack += attack;
-        self.attackLabel.string = self.attack;        
-    },        
-    setAttackBy: function(dAttack){
-        var self = this;        
-        self.attackLabel.string = self.attack += dAttack;
-    },    
     
     useCard: function(){
-        var eventsend = new cc.Event.EventCustom('creaturecreate',true);  
-            eventsend.setUserData({X:this.node.x,Y:-95,attack:this.attack,health:this.health,team:-1}); 
-        this.node.dispatchEvent(eventsend);        
+        var self = this;
+        cc.log("稍等1");
+        var script = null;
+        if(self.cardType === 0){
+            script = self.node.getComponent('M' + self.cardID);
+        }else{
+            script = self.node.getComponent('C' + self.cardID);
+        }
+        cc.log("稍等2");
+        script.useCard();
     }
+
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

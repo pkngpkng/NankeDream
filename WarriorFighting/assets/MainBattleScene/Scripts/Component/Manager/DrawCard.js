@@ -23,6 +23,8 @@ cc.Class({
         cardTypeFlag: 0,
         //handCardMaxNum: 0,
         drawCardFlag: 0,
+        
+        roll: cc.Node,
     },
     
     // use this for initialization
@@ -31,8 +33,9 @@ cc.Class({
         this.cardTypeFlag = cc.randomMinus1To1();
         this.heroComponent = this.heroNode.getComponent('Player');
         
-        //先发7张牌再说
-        for(i = 0 ;i < 5 ; i++){
+        
+        //先发6张牌再说
+        for(i = 0 ;i < 6 ; i++){
             this.showNewCard();
         }
         //4秒补充一张牌
@@ -47,6 +50,8 @@ cc.Class({
     
     creatNewCard: function(cardObject){
             var newCard = cc.instantiate(cardObject);
+            var script = newCard.getComponent('Card');
+            script.roll = this.roll;
             newCard.x = 120*(this.positionX);
             newCard.y = 0;
             newCard.tag = this.positionX;
@@ -93,8 +98,10 @@ cc.Class({
        
                 if(cardObject.y >= 100){
                     var script = cardObject.getComponent('Card');
+                    
                     if(this.heroComponent.mana >= script.manaConsume){
                         this.heroComponent.mana -= script.manaConsume;
+                        script.useCard();                        
                         this.cardGroup.splice(this.cardGroup.indexOf(cardObject),1);
                         this.fnRenewCard();
                         this.positionX--;

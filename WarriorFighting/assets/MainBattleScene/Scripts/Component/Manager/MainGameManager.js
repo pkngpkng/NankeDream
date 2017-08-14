@@ -103,6 +103,8 @@ var MainGameManager = cc.Class({
 
             mapScript.fnCreateSign(this.creatures[this.creatures.length - 1]);
             this.logicLayer.addChild(this.creatures[this.creatures.length - 1]);
+            
+            cc.log("传过来了");
 
             //kenan 停止事件冒泡   (停止继续向上传递此事件)
             event.stopPropagation();
