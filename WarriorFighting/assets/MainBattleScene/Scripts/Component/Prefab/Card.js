@@ -8,7 +8,13 @@ cc.Class({
         manaConsumeLabel: cc.Label, 
         
         //卡片类型
-        cardType: 0,     //0法术牌；1生物牌 
+        cardType: {
+            type: cc.Enum({
+               MagicCard: 0,
+               CreepCard: 1,
+            }),
+            default: 0,
+        },     //0法术牌；1生物牌
         //卡片ID
         cardID: 0,
         //卡片名称
@@ -34,7 +40,7 @@ cc.Class({
         var self = this;
         cc.log("稍等1");
         var script = null;
-        if(self.cardType === 0){
+        if(self.cardType === self.cardType.CreepCard){
             script = self.node.getComponent('M' + self.cardID);
         }else{
             script = self.node.getComponent('C' + self.cardID);
