@@ -1,3 +1,6 @@
+//月光虫 1费生物 1攻-7血（id 0000生物）
+//无效果。
+
 cc.Class({
     extends: cc.Component,
 
@@ -49,6 +52,10 @@ cc.Class({
         var self = this;        
         self.attackLabel.string = self.attack += dAttack;
     },    
+    
+    getUseState: function(){
+        return true;
+    },
     
     useCard: function(){
         var eventsend = new cc.Event.EventCustom('creatureCreate',true);  

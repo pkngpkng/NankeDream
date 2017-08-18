@@ -50,6 +50,18 @@ cc.Class({
         self.attackLabel.string = self.attack += dAttack;
     },    
     
+    getUseState: function(){
+        var state;
+        var self = this;
+        if(self.mainScript.hero.x - 200 < this.node.x + this.node.parent.x - this.roll.x &&
+           self.mainScript.hero.x + 200 > this.node.x + this.node.parent.x - this.roll.x ){
+               state = true;
+           }else{
+               state = false;
+           }
+        return state;
+    },
+    
     useCard: function(){
         var eventsend = new cc.Event.EventCustom('creatureCreate',true);  
         var position = this.node.x + this.node.parent.x - this.roll.x;

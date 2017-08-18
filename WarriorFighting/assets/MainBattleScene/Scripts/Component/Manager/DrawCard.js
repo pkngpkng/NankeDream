@@ -52,6 +52,7 @@ cc.Class({
             var newCard = cc.instantiate(cardObject);
             var script = newCard.getComponent('Card');
             script.roll = this.roll;
+            script.hero = this.heroNode;
             newCard.x = 120*(this.positionX);
             newCard.y = 0;
             newCard.tag = this.positionX;
@@ -98,8 +99,9 @@ cc.Class({
        
                 if(cardObject.y >= 100){
                     var script = cardObject.getComponent('Card');
-                    
-                    if(this.heroComponent.mana >= script.manaConsume){
+                    if(this.heroComponent.mana >= script.manaConsume 
+                       && script.getUseState() === true){
+                           
                         this.heroComponent.mana -= script.manaConsume;
                         script.useCard();                        
                         this.cardGroup.splice(this.cardGroup.indexOf(cardObject),1);

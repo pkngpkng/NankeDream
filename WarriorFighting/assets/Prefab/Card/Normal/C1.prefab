@@ -628,14 +628,15 @@
       "__id__": 6
     },
     "cardType": 1,
-    "cardID": 0,
-    "cName": "月光虫",
+    "cardID": 1,
+    "cName": "虚空暴食者",
     "cNameLabel": {
       "__id__": 18
     },
     "describeLabel": {
       "__id__": 3
-    }
+    },
+    "roll": null
   },
   {
     "__type__": "6cbe2Ln7YNM6r5Zv2hotCaU",
@@ -656,7 +657,8 @@
     "velocity": 2,
     "velocityLabel": {
       "__id__": 15
-    }
+    },
+    "roll": null
   },
   {
     "__type__": "cc.PrefabInfo",

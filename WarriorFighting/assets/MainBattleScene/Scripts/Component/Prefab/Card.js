@@ -27,6 +27,8 @@ cc.Class({
         describeLabel: cc.Label,
         
         roll: cc.Node,
+        //用于读取英雄的节点
+        hero: cc.Node,
     },
 
     // use this for initialization
@@ -34,19 +36,25 @@ cc.Class({
         var self = this;
         self.manaConsumeLabel.string = self.manaConsume;
         self.cNameLabel.String = self.cName;
+        
+        self.script = null;
+        if(self.cardType === 0){
+            self.script = self.node.getComponent('M' + self.cardID);
+        }else{
+            self.script = self.node.getComponent('C' + self.cardID);
+        }
+    },
+    
+    //获得使用情况 false 无法使用；true可以使用
+    getUseState: function(){
+        var self = this;
+        var state = self.script.getUseState();
+        return state;
     },
     
     useCard: function(){
         var self = this;
-        cc.log("稍等1");
-        var script = null;
-        if(self.cardType === self.cardType.CreepCard){
-            script = self.node.getComponent('M' + self.cardID);
-        }else{
-            script = self.node.getComponent('C' + self.cardID);
-        }
-        cc.log("稍等2");
-        script.useCard();
+        self.script.useCard();
     }
 
     // called every frame, uncomment this function to activate update callback

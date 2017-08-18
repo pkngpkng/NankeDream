@@ -10,6 +10,9 @@ cc.Class({
 //        var self = this;
     },
  
+    getUseState: function(){
+        return true;
+    },    
     
     useCard: function(){
 
