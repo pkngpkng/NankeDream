@@ -9,7 +9,7 @@ cc.Class({
                 AreaTarget: 1,
                 DirectionTarget: 2,
             }),
-            default: 0,
+            default: 0
         },
 
 
@@ -18,6 +18,11 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         var self = this;
+        self.magicTypeEnum = cc.Enum({
+            NoTarget: 0,
+            AreaTarget: 1,
+            DirectionTarget: 2,
+        });
         // 这个添加监听为测试用
         self.startListen();
     },
@@ -30,7 +35,7 @@ cc.Class({
     NoTargetMagicStartListen: function (event) {
         if (event.getButton() === cc.Event.EventMouse.BUTTON_LEFT)
         {
-            console.log("NoTargetMagicStartListen" + event.getLocationX());
+            console.log("NoTargetMagicStartListen" + event.getLocationX().toFixed(0));
         }
     },
     /**
@@ -55,7 +60,7 @@ cc.Class({
      * @constructor
      */
     NoTargetMagicMoveListen: function (event) {
-        console.log("NoTargetMagicStartListen " + event.getLocationX() + "," + event.getLocationY().toFixed(0));
+        // console.log("NoTargetMagicStartListen " + event.getLocationX().toFixed(0) + "," + event.getLocationY().toFixed(0));
     },
     /**
      *

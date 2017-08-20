@@ -32,10 +32,9 @@ cc.Class({
         this.returnPostion = 0;
         this.cardTypeFlag = cc.randomMinus1To1();
         this.heroComponent = this.heroNode.getComponent('Player');
-        
-        
+
         //先发6张牌再说
-        for(i = 0 ;i < 6 ; i++){
+        for(var i = 0 ;i < 6 ; i++){
             this.showNewCard();
         }
         //4秒补充一张牌
@@ -62,8 +61,8 @@ cc.Class({
             this.cardTypeFlag = cc.randomMinus1To1();
             this.node.addChild(newCard);
             
-            this.cardShape(newCard);
-            this.cardUse(newCard);
+            // this.cardShape(newCard);
+            // this.cardUse(newCard);
     },
     
     creatCardType: function(){
@@ -135,7 +134,9 @@ cc.Class({
         }
     },
 
+    changeCardToUsing: function (event) {
 
+    },
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

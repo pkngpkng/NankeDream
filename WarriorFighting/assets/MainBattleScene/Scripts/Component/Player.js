@@ -48,21 +48,32 @@ cc.Class({
     },
     
     update: function (dt) {
-        if (this.accLeft){
-            this.xSpeed = -this.maxMoveSpeed;
-            this.body.scaleX = -1;
-        //   this.body.rotation = -30;
-        }
-        
-        if (this.accRight){
-            this.xSpeed = this.maxMoveSpeed;
-            this.body.scaleX = 1;
-        //    this.body.rotation = 30;
-        }
-        
-        if (!this.accLeft && !this.accRight){
+        // if (this.accLeft){
+        //     this.xSpeed = -this.maxMoveSpeed;
+        //     this.body.scaleX = -1;
+        // //   this.body.rotation = -30;
+        // }
+        //
+        // if (this.accRight){
+        //     this.xSpeed = this.maxMoveSpeed;
+        //     this.body.scaleX = 1;
+        // //    this.body.rotation = 30;
+        // }
+        //
+        // if (!this.accLeft && !this.accRight){
+        //     this.xSpeed = 0;
+        // //    this.body.rotation = 0;
+        // }
+
+        //处理X轴的速度
+        if (this.accLeft === this.accRight) {//左右键同时按或不按，则不动
             this.xSpeed = 0;
-        //    this.body.rotation = 0;
+        } else if (this.accLeft === true) {
+                this.body.scaleX = -1;
+            this.xSpeed = -this.maxMoveSpeed;//向左
+        } else if (this.accRight === true) {
+                this.body.scaleX = 1;
+            this.xSpeed = this.maxMoveSpeed;//向右
         }
         
         // 根据当前速度更新主角的位置
@@ -122,11 +133,11 @@ cc.Class({
                     case cc.KEY.a:
                     case cc.KEY.left:
                         self.accLeft = true;
-                        self.accRight = false;
+                        // self.accRight = false;
                         break;
                     case cc.KEY.d:
                     case cc.KEY.right:
-                        self.accLeft = false;
+                        // self.accLeft = false;
                         self.accRight = true;
                         break;
                     case cc.KEY.w:
