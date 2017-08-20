@@ -389,17 +389,18 @@
     },
     "cardType": 0,
     "cardID": 0,
-    "cardName": "String",
-    "cardNameLabel": {
-      "__id__": 9
-    },
+    "cName": "String",
+    "cNameLabel": null,
     "describeLabel": {
       "__id__": 3
     },
-    "roll": null
+    "cardHand": null,
+    "cardUsing": null,
+    "roll": null,
+    "hero": null
   },
   {
-    "__type__": "449dbtOTvBKUYV3EAo+eOYF",
+    "__type__": "af2a9L9hlVLQqrOGnyDSxgc",
     "_name": "",
     "_objFlags": 0,
     "node": {
