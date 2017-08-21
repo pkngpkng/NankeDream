@@ -93,6 +93,7 @@ cc.Class({
      */
     AreaTargetMagicEndListen: function (event) {
         console.log("AreaTargetMagicEndListen");
+        this.node.removeFromParent();
     },
     /**
      *

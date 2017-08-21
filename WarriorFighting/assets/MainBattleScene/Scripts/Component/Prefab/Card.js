@@ -61,26 +61,30 @@ cc.Class({
         cardObject.on(cc.Node.EventType.MOUSE_ENTER, this.enterMouseEvent, this);
         cardObject.on(cc.Node.EventType.MOUSE_LEAVE, this.leaveMouseEvent, this);
 
-        // self.manaConsumeLabel.string = self.manaConsume;
-        // self.cardNameLabel.String = self.cardName;
+        self.manaConsumeLabel.string = self.manaConsume;
+        self.cNameLabel.String = self.cName;
     },
 
     //获得使用情况 false 无法使用；true可以使用
     getUseState: function(){
         var self = this;
-        var state = self.script.getUseState();
-        return state;
-    },
-    useCard: function(){
-        var self = this;
-        cc.log("稍等1");
         var script = null;
         if(self.cardType === 0){
             script = self.node.getComponent('M' + self.cardID);
         }else{
             script = self.node.getComponent('C' + self.cardID);
         }
-        cc.log("稍等2");
+        var state = script.getUseState();
+        return state;
+    },
+    useCard: function(){
+        var self = this;
+        var script = null;
+        if(self.cardType === 0){
+            script = self.node.getComponent('M' + self.cardID);
+        }else{
+            script = self.node.getComponent('C' + self.cardID);
+        }
         script.useCard();
     },
 

@@ -26,6 +26,8 @@ cc.Class({
         // 卡牌选择与退出的监听
         this.node.on("cardSelect", this.cardSelectEvent, this);
         this.node.on("cardExit", this.cardExitEvent, this);
+        
+        this.cardHandScript = this.cardHand.getComponent("DrawCard");
         //
         // this.node.on(cc.Node.EventType.MOUSE_DOWN,this.downMouseEvent,this);
         // this.node.on(cc.Node.EventType.MOUSE_UP,this.upMouseEvent,this);
@@ -55,11 +57,15 @@ cc.Class({
     },
 
     upMouseEvent: function (event) {
+        
+
         //关闭监听鼠标移动事件
         if (this.cardObject) {
             console.log("mouse up");
             this.cardObject.off(cc.Node.EventType.MOUSE_MOVE,this.moveMouseEvent,this);
+
         }
+
     },
 
     moveMouseEvent: function (event) {
