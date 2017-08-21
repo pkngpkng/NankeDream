@@ -88,7 +88,7 @@ cc.Class({
                 cardObject.on(cc.Node.EventType.MOUSE_MOVE,cardMove,this);
             }, this);
             cardObject.on(cc.Node.EventType.MOUSE_UP,function(){
-                cardObject.opacity = 1000;
+                cardObject.opacity = 255;
                 cardObject.off(cc.Node.EventType.MOUSE_MOVE,cardMove,this);
        
                 if(cardObject.y >= 100){
@@ -113,7 +113,7 @@ cc.Class({
                     cardObject.x += event.getDeltaX();
                     cardObject.y += event.getDeltaY();
                     if(cardObject.y >= 100){
-                    cardObject.opacity = 1000;
+                    cardObject.opacity = 255;
                 }
             }
     },
