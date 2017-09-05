@@ -67,25 +67,39 @@ cc.Class({
 
     //获得使用情况 false 无法使用；true可以使用
     getUseState: function(){
-        var self = this;
-        var script = null;
-        if(self.cardType === 0){
-            script = self.node.getComponent('M' + self.cardID);
-        }else{
-            script = self.node.getComponent('C' + self.cardID);
+        // var self = this;
+        // var script = null;
+        // if(self.cardType === 0){
+        //     script = self.node.getComponent('M' + self.cardID);
+        // }else{
+        //     script = self.node.getComponent('C' + self.cardID);
+        // }
+        // var state = script.getUseState();
+        // return state;
+        var state = true;
+
+        //卡牌的判断
+        //若真，则往下一层判断
+        if (state) {
+            state = this.typeComponent.getUseState();
         }
-        var state = script.getUseState();
+
         return state;
     },
     useCard: function(){
-        var self = this;
-        var script = null;
-        if(self.cardType === 0){
-            script = self.node.getComponent('M' + self.cardID);
-        }else{
-            script = self.node.getComponent('C' + self.cardID);
+        // var self = this;
+        // var script = null;
+        // if(self.cardType === 0){
+        //     script = self.node.getComponent('M' + self.cardID);
+        // }else{
+        //     script = self.node.getComponent('C' + self.cardID);
+        // }
+        // script.useCard();
+        if (this.getUseState()) {
+            //卡牌层面的操作
+            //下一层的操作
         }
-        script.useCard();
+
     },
 
     enterMouseEvent: function (event) {
@@ -94,7 +108,8 @@ cc.Class({
 
 
         cardObject.on(cc.Node.EventType.TOUCH_START,this.downMouseEvent,this);
-        cardObject.on(cc.Node.EventType.TOUCH_END,this.upMouseEvent,this);
+
+        event.stopPropagation();
     },
 
     leaveMouseEvent: function (event) {
@@ -102,18 +117,35 @@ cc.Class({
         cardObject.stopAllActions();
         cardObject.runAction(cc.speed(cc.scaleTo(1,1),7));
 
+        event.stopPropagation();
     },
 
     downMouseEvent: function (event) {
-        //开始监听鼠标移动事件
-        var cardObject = this.node;
+        var self = this;
+        // 获取节点组件
+        var heroScripts =  self.hero.getComponent("Player");
+        // 判断魔法值
+        if (heroScripts.checkMana(self.manaConsume)) {
+            //开始监听鼠标移动事件
 
-        var sender = new cc.Event.EventCustom('cardSelect',true);
-        sender.setUserData({card: this.node, posX: event.getLocationX(), posY: event.getLocationY()});
-        this.node.dispatchEvent(sender);
+            var cardObject = this.node;
+            var sender = new cc.Event.EventCustom('cardSelect', true);
+            sender.setUserData({card: this.node, posX: event.getLocationX(), posY: event.getLocationY()});
+            this.node.dispatchEvent(sender);
+            console.log("downMouse!");
 
-        // 开启移动监听
-        cardObject.on(cc.Node.EventType.TOUCH_MOVE,this.moveMouseEvent,this);
+            // 开启移动监听
+            cardObject.on(cc.Node.EventType.TOUCH_MOVE, this.moveMouseEvent, this);
+            cardObject.on(cc.Node.EventType.TOUCH_END,this.upMouseEvent,this);
+        } else {
+
+            var sender1 = new cc.Event.EventCustom('errorTips', true);
+            sender1.setUserData({text: "No enough mana!"});
+            this.node.dispatchEvent(sender1);
+
+        }
+
+        event.stopPropagation();
     },
 
     upMouseEvent: function (event) {
@@ -124,10 +156,16 @@ cc.Class({
         sender.setUserData({card: this.node});
         this.node.dispatchEvent(sender);
 
+        console.log("upMouse");
+
         // 关闭一系列监听
         cardObject.off(cc.Node.EventType.TOUCH_MOVE,this.moveMouseEvent,this);
         cardObject.off(cc.Node.EventType.TOUCH_START,this.downMouseEvent,this);
         cardObject.off(cc.Node.EventType.TOUCH_END,this.upMouseEvent,this);
+
+        // this.drawCardScript.deleteCard(this.cardIndex);
+
+        event.stopPropagation();
     },
 
     moveMouseEvent: function (event) {
@@ -135,15 +173,9 @@ cc.Class({
         var cardObject = this.node;
         cardObject.x += event.getDeltaX();
         cardObject.y += event.getDeltaY();
+
+        event.stopPropagation();
     },
-
-    checkCondition: function () {
-        var condition = true;
-
-
-
-        return condition;
-    }
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

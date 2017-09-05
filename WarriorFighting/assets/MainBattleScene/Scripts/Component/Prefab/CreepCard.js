@@ -24,7 +24,7 @@ cc.Class({
             DirectionTarget: 2,
         });
         // 这个添加监听为测试用
-        self.startListen();
+        // self.startListen();
     },
 
     /**
@@ -93,7 +93,7 @@ cc.Class({
      */
     AreaTargetMagicEndListen: function (event) {
         console.log("AreaTargetMagicEndListen");
-        this.node.removeFromParent();
+        // this.node.removeFromParent();
     },
     /**
      *

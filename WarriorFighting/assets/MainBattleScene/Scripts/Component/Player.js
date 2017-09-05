@@ -171,6 +171,12 @@ cc.Class({
             }
         }, self.node);
     },
+
+    // 判断魔法是否足够
+    checkMana: function(cost) {
+        var self = this;
+        return (cost <= self.mana);
+    },
     
     generateNode: function () {
         var monster = this._pool.get();

@@ -42,27 +42,39 @@ cc.Class({
     },
 
     showNewCard: function(){
-        if(this.positionX < 8){
+        if(this.cardGroup.length < 8){
             this.creatCardType();
         }
     },
     
     creatNewCard: function(cardObject){
-            var newCard = cc.instantiate(cardObject);
-            var script = newCard.getComponent('Card');
-            script.roll = this.roll;
-            script.hero = this.heroNode;
-            newCard.x = 120*(this.positionX);
-            newCard.y = 0;
-            newCard.tag = this.positionX;
-            this.cardGroup.push(newCard);
-            
-            this.positionX++;
-            this.cardTypeFlag = cc.randomMinus1To1();
-            this.node.addChild(newCard);
-            
-            // this.cardShape(newCard);
-            // this.cardUse(newCard);
+        var newCard = cc.instantiate(cardObject);
+        var script = newCard.getComponent('Card');
+        script.roll = this.roll;
+        script.hero = this.heroNode;
+        newCard.x = 120*(this.positionX);
+        newCard.y = 0;
+        newCard.tag = this.positionX;
+        // ------------------------------------------------------------------------------ //
+        script.drawCardScript = this;
+        script.cardIndex = this.cardGroup.length;
+        // ------------------------------------------------------------------------------ //
+        this.cardGroup.push(newCard);
+
+        this.positionX++;
+        this.cardTypeFlag = cc.randomMinus1To1();
+        this.node.addChild(newCard, script.cardIndex);
+
+        // this.cardShape(newCard);
+        // this.cardUse(newCard);
+    },
+
+    // 删除牌
+    deleteCard: function (index) {
+        var self = this;
+        var cardObject = self.cardGroup[index];
+        self.cardGroup.splice(index, 1);
+        cardObject.destroy();
     },
     
     creatCardType: function(){

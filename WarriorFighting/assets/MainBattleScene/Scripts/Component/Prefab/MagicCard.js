@@ -24,7 +24,7 @@ cc.Class({
             DirectionTarget: 2,
         });
         // 这个添加监听为测试用
-        self.startListen();
+        // self.startListen();
     },
 
     /**
@@ -35,7 +35,7 @@ cc.Class({
     NoTargetMagicStartListen: function (event) {
         if (event.getButton() === cc.Event.EventMouse.BUTTON_LEFT)
         {
-            console.log("NoTargetMagicStartListen" + event.getLocationX().toFixed(0));
+            // console.log("NoTargetMagicStartListen" + event.getLocationX().toFixed(0));
         }
     },
     /**
@@ -44,7 +44,7 @@ cc.Class({
      * @constructor
      */
     AreaTargetMagicStartListen: function (event) {
-        console.log("AreaTargetMagicStartListen");
+        // console.log("AreaTargetMagicStartListen");
     },
     /**
      *
@@ -52,7 +52,7 @@ cc.Class({
      * @constructor
      */
     DirectionTargetMagicStartListen: function (event) {
-        console.log("DirectionTargetMagicStartListen");
+        // console.log("DirectionTargetMagicStartListen");
     },
     /**
      *
@@ -68,7 +68,7 @@ cc.Class({
      * @constructor
      */
     AreaTargetMagicMoveListen: function (event) {
-        console.log("AreaTargetMagicMoveListen");
+        // console.log("AreaTargetMagicMoveListen");
     },
     /**
      *
@@ -76,7 +76,7 @@ cc.Class({
      * @constructor
      */
     DirectionTargetMagicMoveListen: function (event) {
-        console.log("DirectionTargetMagicMoveListen");
+        // console.log("DirectionTargetMagicMoveListen");
     },
     /**
      *
@@ -84,7 +84,7 @@ cc.Class({
      * @constructor
      */
     NoTargetMagicEndListen: function (event) {
-        console.log("NoTargetMagicEndListen");
+        // console.log("NoTargetMagicEndListen");
     },
     /**
      *
@@ -92,8 +92,8 @@ cc.Class({
      * @constructor
      */
     AreaTargetMagicEndListen: function (event) {
-        console.log("AreaTargetMagicEndListen");
-        this.node.removeFromParent();
+        // console.log("AreaTargetMagicEndListen");
+        // this.node.removeFromParent();
     },
     /**
      *
@@ -101,7 +101,7 @@ cc.Class({
      * @constructor
      */
     DirectionTargetMagicEndListen: function (event) {
-        console.log("DirectionTargetMagicEndListen");
+        // console.log("DirectionTargetMagicEndListen");
     },
 
 
