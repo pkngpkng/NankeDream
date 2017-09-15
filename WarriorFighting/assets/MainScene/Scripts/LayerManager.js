@@ -48,7 +48,9 @@ cc.Class({
         //cc.director.loadScene("CardGroupScene.fire");
     },*/
     
-    
+    onLoad:function(){
+        this.node.active = false;  
+    },
     heroInfLayout: function () {
         this.layoutSwitch(this.choiceHeroBoard,this.heroInfButton);
         //cc.director.loadScene("HeroInfScene.fire");

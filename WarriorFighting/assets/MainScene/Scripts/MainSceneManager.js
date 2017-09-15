@@ -6,23 +6,51 @@ cc.Class({
 
     properties: {
         
-        coin: 0,
         //玩家的金币数量
-        soul: 0,
+        coin: 0,
+        
         //玩家的灵魂(类似粉尘)数量
+        soul: 0,
         
-        bags: 0,
+        
         //玩家可以打开的卡牌包数量
+        bags: 0,
         
-        miniCreaturePrefab: [cc.Prefab],
+        
         //生物卡片预览用的预制
-        miniMagicPrefab: [cc.Prefab],
+        miniCreaturePrefab: [cc.Prefab],
+        
         //魔法卡片预览用的预制
+        miniMagicPrefab: [cc.Prefab],
         
-        myCards: [cc.Integer],
         
+        myCCards: [cc.Integer],
+        
+        myMCards:[cc.Integer],
     
+    
+        deckBuildPrefab: cc.Prefab,
+        myMDeck:{
+            default:[],
+            type: cc.Integer,
+        },
+        myCDeck:{
+            default:[],
+            type: cc.Integer,
+        },
         
+        
+        showMPrefab:{
+            default: [],
+            type: cc.Prefab,
+        },
+        
+        showCPrefab:{
+            default: [],
+            type: cc.Prefab,
+        },
+        
+        maxDeckNum:0,
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time

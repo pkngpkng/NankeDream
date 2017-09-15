@@ -10,28 +10,9 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "C00mini",
+    "_name": "M0show",
     "_objFlags": 0,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
     "_parent": null,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 80,
-      "height": 100
-    },
     "_children": [
       {
         "__id__": 2
@@ -41,54 +22,31 @@
       },
       {
         "__id__": 8
+      },
+      {
+        "__id__": 11
       }
     ],
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": 3,
-      "y": 381
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
     "_tag": -1,
-    "_opacityModifyRGB": false,
-    "_id": "",
     "_active": true,
     "_components": [
       {
-        "__id__": 11
-      },
-      {
-        "__id__": 12
+        "__id__": 14
       }
     ],
     "_prefab": {
-      "__id__": 13
+      "__id__": 15
     },
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "ManaConsume",
-    "_objFlags": 0,
+    "_id": "",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 230,
-      "g": 205,
-      "b": 29,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
-    "_parent": {
-      "__id__": 1
-    },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
@@ -96,26 +54,34 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 9.45,
-      "height": 20
+      "width": 100,
+      "height": 140
     },
-    "_children": [],
     "_rotationX": 0,
     "_rotationY": 0,
     "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -33,
-      "y": 40.2
+      "x": 884,
+      "y": 433
     },
     "_skewX": 0,
     "_skewY": 0,
     "_localZOrder": 0,
     "_globalZOrder": 0,
-    "_tag": -1,
     "_opacityModifyRGB": false,
-    "_id": "",
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "CardInfo",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
     "_active": true,
     "_components": [
       {
@@ -125,6 +91,40 @@
     "_prefab": {
       "__id__": 4
     },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 15,
+      "g": 13,
+      "b": 13,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 127.82,
+      "height": 25
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 0.6,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0.3,
+      "y": -41
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
     "groupIndex": 0
   },
   {
@@ -136,15 +136,17 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 17,
-    "_fontSize": 17,
-    "_lineHeight": 20,
+    "_actualFontSize": 25,
+    "_fontSize": 25,
+    "_lineHeight": 25,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
-    "_N$string": "0",
+    "_spacingX": 0,
+    "_N$string": "Magic Card",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
     "_N$overflow": 0
   },
   {
@@ -153,53 +155,20 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ffbfdff8-effc-456b-adc3-2d00d885c5ab"
+      "__id__": 0
     },
-    "fileId": "bd818GtcjBLmIthp5ztaeDt"
+    "fileId": "62fa88phQ1I34t3QKp3A4zv",
+    "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "Num",
+    "_name": "ManaConsume",
     "_objFlags": 0,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
     "_parent": {
       "__id__": 1
     },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 21,
-      "height": 20
-    },
     "_children": [],
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": 37.4,
-      "y": -39.1
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
     "_tag": -1,
-    "_opacityModifyRGB": false,
-    "_id": "",
     "_active": true,
     "_components": [
       {
@@ -209,6 +178,40 @@
     "_prefab": {
       "__id__": 7
     },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 230,
+      "g": 205,
+      "b": 29,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 11.12,
+      "height": 20
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": -38,
+      "y": 58
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
     "groupIndex": 0
   },
   {
@@ -220,15 +223,17 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 10,
-    "_fontSize": 10,
+    "_actualFontSize": 20,
+    "_fontSize": 20,
     "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
-    "_N$string": "Num",
+    "_spacingX": 0,
+    "_N$string": "2",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
     "_N$overflow": 0
   },
   {
@@ -237,53 +242,20 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ffbfdff8-effc-456b-adc3-2d00d885c5ab"
+      "__id__": 0
     },
-    "fileId": "2e11fJBmCJC35M5vZwUX9MU"
+    "fileId": "aa4d4G+TEFM76D9WXyycvVz",
+    "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "CardName",
+    "_name": "Label",
     "_objFlags": 0,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
     "_parent": {
       "__id__": 1
     },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 45.35,
-      "height": 17
-    },
     "_children": [],
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -0.8,
-      "y": -58.9
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
     "_tag": -1,
-    "_opacityModifyRGB": false,
-    "_id": "",
     "_active": true,
     "_components": [
       {
@@ -293,6 +265,40 @@
     "_prefab": {
       "__id__": 10
     },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 100,
+      "height": 20
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": -80
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
     "groupIndex": 0
   },
   {
@@ -304,15 +310,17 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 17,
-    "_fontSize": 17,
-    "_lineHeight": 17,
+    "_actualFontSize": 20,
+    "_fontSize": 20,
+    "_lineHeight": 20,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
-    "_N$string": "Name",
+    "_spacingX": 0,
+    "_N$string": "不死鸟粉尘",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
     "_N$overflow": 0
   },
   {
@@ -321,9 +329,97 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ffbfdff8-effc-456b-adc3-2d00d885c5ab"
+      "__id__": 0
     },
-    "fileId": "defed9dTJRH/JAC4XTkp7+h"
+    "fileId": "137c1lnlcNCyrof+nu6fltl",
+    "sync": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Info",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 12
+      }
+    ],
+    "_prefab": {
+      "__id__": 13
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 100,
+      "height": 150
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": -2,
+      "y": -168
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 11
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 20,
+    "_fontSize": 20,
+    "_lineHeight": 20,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$string": "噫吁嚱，呜呼哀哉，此卡之蠢，蠢于上青天，智障卡，别用",
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 2
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "173a6Y2c5VJOYuFubEVveUU",
+    "sync": false
   },
   {
     "__type__": "cc.Sprite",
@@ -334,7 +430,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "25fe3025-f998-41ea-84ff-bb9e22bf955b"
+      "__uuid__": "22d47abc-1cd1-4fd6-92ad-19096e8f459a"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -352,36 +448,14 @@
     "_atlas": null
   },
   {
-    "__type__": "11e0fJ4fnlCWp7SnkjNAD7M",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "manaConsume": 0,
-    "manaConsumeLabel": {
-      "__id__": 3
-    },
-    "cardType": 1,
-    "cardID": 0,
-    "num": 0,
-    "numLabel": {
-      "__id__": 6
-    },
-    "cName": "月光虫",
-    "cNameLabel": {
-      "__id__": 9
-    }
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ffbfdff8-effc-456b-adc3-2d00d885c5ab"
+      "__id__": 0
     },
-    "fileId": "cc5d2cSPnNDVLGD52A8zRak"
+    "fileId": "d7c65XsEXRDqJNRNSI6OnP2",
+    "sync": false
   }
 ]

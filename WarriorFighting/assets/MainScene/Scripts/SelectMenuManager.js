@@ -26,10 +26,10 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.selectMenuList.opacity = 0;
+        this.selectMenuList.active = false;
     },
     showSelectMenuList: function(){
-        this.selectMenuList.opacity = 255;
+        this.selectMenuList.active = true;
         this.selectMenuListOperation(this.occupationList);
         this.hideSelectMenuList(this.selectMenuList);
         this.pickSelectMenuItem(this.occupationList);
@@ -95,13 +95,13 @@ cc.Class({
             this.selectMenuKind.string = "中立";
         }
         function stopAction() {
-            this.selectMenuList.opacity = 0;
+            this.selectMenuList.active = false;
         }
     },
     hideSelectMenuList: function(selectBoard){
         selectBoard.on(cc.Node.EventType.MOUSE_LEAVE,hideSelectBoard, this);
         function hideSelectBoard(){
-            selectBoard.opacity = 0;
+            selectBoard.active = false;
         }
     },
     

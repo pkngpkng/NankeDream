@@ -2,6 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        panelNode:cc.Node,
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -24,6 +25,10 @@ cc.Class({
         this.isGoRight = false;//判断是否向右走
         this.isStand = false;//站立状态
         this.isStandPlatform = false;//是否站在台上
+        this.isStandWall = false;//是否站在墙体上
+        this.isTouchWallL = false;
+        this.isTouchWallR = false;
+        this.isTouchWallD = false;
 
         this.climbSpeed  = cc.v2(0,0);
         this.isClimbingUp = false;//判断是否为向上攀爬状态
@@ -33,34 +38,52 @@ cc.Class({
 
         //开启碰撞
         cc.director.getCollisionManager().enabled = true;
-        cc.director.getCollisionManager().enabledDebugDraw = true;
+        //cc.director.getCollisionManager().enabledDebugDraw = true;
 
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed: this.onKeyPressed.bind(this),
             onKeyReleased: this.onKeyReleased.bind(this),
         }, this.node);
+        
+        this.initMouseEvent();
+        
+        
+    },
+    
+    initMouseEvent:function(){
+        this.node.on(cc.Node.EventType.MOUSE_DOWN,openPanel, this);
+
+        function openPanel(){
+            this.panelNode.active = true;
+        }    
     },
     onKeyPressed: function (keyCode, event) {
         switch(keyCode) {
             case cc.KEY.a:
             case cc.KEY.left:
                 this.isGoLeft = true;
+                this.isTouchWallL = false;
                 break;
             case cc.KEY.d:
             case cc.KEY.right:
                 this.isGoRight = true;
+                this.isTouchWallR = false;
                 break;
             case cc.KEY.w:
             case cc.KEY.up:
-                if ((this.isStand || this.isStandPlatform) && this.touchedLadder === null) {
+                if ((this.isStand || this.isStandPlatform  || this.isStandWall) && this.touchedLadder === null) {
                     this.speed.y = this.jumpSpeed;
+                    this.isStand = false;
+                    this.isStandPlatform = false;
+                    this.isStandWall = false;
                 } else if (this.touchedLadder !== null) {
                     this.isClimbing = true;
                     this.isClimbingUp = true;
                     this.node.x = this.touchedLadder.x;
                     this.speed.y = 0;
                     this.isStandPlatform = false;
+                    //this.isStandWall = false;
                 }
                 break;
             case cc.KEY.s:
@@ -71,6 +94,7 @@ cc.Class({
                     this.node.x = this.touchedLadder.x;
                     this.speed.y = 0;
                     this.isStandPlatform = false;
+                    //this.isStandWall = false;
                 }
                 break;
         }
@@ -91,6 +115,7 @@ cc.Class({
                 this.isClimbingUp = false;
                 if (this.touchedLadder !== null) {
                     this.isStandPlatform = false;
+                    //this.isStandWall = false;
                 }
                 break;
             case cc.KEY.s:
@@ -98,6 +123,7 @@ cc.Class({
                 this.isClimbingDown = false;
                 if (this.touchedLadder !== null) {
                     this.isStandPlatform = false;
+                    //this.isStandWall = false;
                 }
                 break;
         }
@@ -126,6 +152,36 @@ cc.Class({
             }
             console.log("touch the Platform");
         }
+        
+        //与完全墙体的接触判断
+        if (other.node.group === "WallU") {
+            if ((self.node.y > other.node.y) && (Math.abs(self.node.x - other.node.x) < other.node.width / 2)) {
+                this.isStandWall = true;
+                this.speed.y = 0;
+            }
+            console.log("touch the WallU");
+        } 
+        if (other.node.group === "WallD") {
+            if ((self.node.y < other.node.y) && ((Math.abs(self.node.x - other.node.x) - self.node.width/2)  < other.node.width / 2) ) {
+                this.isTouchWallD = true;
+                this.speed.y = 0;
+            }
+            console.log("touch the WallD");
+        }         
+        if (other.node.group === "WallL") {
+            if ((self.node.x < other.node.x) && ((Math.abs(self.node.y - other.node.y) < other.node.height / 2 + self.node.height / 2)) ) {
+                this.isTouchWallL = true;
+                this.speed.x = 0;
+            }     
+            console.log("touch the WallL");
+        }     
+        if (other.node.group === "WallR") {
+            if ((self.node.x > other.node.x) && ((Math.abs(self.node.y - other.node.y) < other.node.height / 2 + self.node.height / 2)) ) {
+                this.isTouchWallR = true;
+                this.speed.x = 0;
+            }  
+            console.log("touch the WallR");
+        }                 
     },
 
     onCollisionExit: function (other, self) {
@@ -141,6 +197,23 @@ cc.Class({
         if (other.node.group === "Platform") {
             this.isStandPlatform = false;
         }
+        
+        if (other.node.group === "WallU") {
+            this.isStandWall = false;
+            console.log("untouch the WallU");
+        }
+        if (other.node.group === "WallD") {
+            this.isTouchWallD = false;
+            console.log("untouch the WallD");
+        }  
+        if (other.node.group === "WallL"/* && this.isGoLeft === true*/) {
+            this.isTouchWallL = false;
+            console.log("untouch the WallL");
+        }  
+        if (other.node.group === "WallR"/* && this.isGoRight === true*/) {
+            this.isTouchWallR = false;
+            console.log("untouch the WallR");
+        }          
     },
 
     // called every frame, uncomment this function to activate update callback
@@ -148,24 +221,24 @@ cc.Class({
         //处理X轴的速度
         if (this.isGoLeft === this.isGoRight) {//左右键同时按或不按，则不动
             this.speed.x = 0;
-        } else if (this.isGoLeft === true) {
+        } else if (this.isGoLeft === true && this.isTouchWallR === false) {
             this.speed.x = -this.moveSpeed;//向左
-        } else if (this.isGoRight === true) {
+        } else if (this.isGoRight === true && this.isTouchWallL === false) {
             this.speed.x = this.moveSpeed;//向右
         }
         //处理Y轴的攀爬速度
         if (this.isClimbingUp === this.isClimbingDown) {//左右键同时按或不按，则不动
             this.climbSpeed.y = 0;
-        } else if (this.isClimbingUp === true) {
+        } else if (this.isClimbingUp === true && !this.isTouchWallD) {
             this.climbSpeed.y = this.moveSpeed;//向上
-        } else if (this.isClimbingDown === true && !this.isStand) {
+        } else if (this.isClimbingDown === true && !this.isStand && !this.isStandWall ) {
             this.climbSpeed.y = -this.moveSpeed;//向下
         } else {
             this.climbSpeed.y = 0;
         }
 
         //处理重力加速度
-        if (!this.isStand && !this.isClimbing && !this.isStandPlatform) {
+        if (!this.isStand && !this.isClimbing && !this.isStandPlatform && !this.isStandWall) {
             this.speed.y -= this.gravite * dt;//加速度对时间积分
         }
 

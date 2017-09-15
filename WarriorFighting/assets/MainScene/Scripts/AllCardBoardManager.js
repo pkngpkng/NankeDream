@@ -10,10 +10,10 @@ cc.Class({
             default: null,
             type: cc.Button
         },
-        allCardBoard:{
-            default: null,
-            type: cc.PageView,
-        },
+        // allCardBoard:{
+        //     default: null,
+        //     type: cc.PageView,
+        // },
     },
 
     // use this for initialization
